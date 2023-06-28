@@ -10,11 +10,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "subjects")
+@EqualsAndHashCode(of = "id")
+@Getter
+@Setter
 public class Subject {
 
   @Id
@@ -26,5 +26,4 @@ public class Subject {
 
   @OneToMany(mappedBy = "subject")
   private List<BankAccount> accounts;
-
 }
