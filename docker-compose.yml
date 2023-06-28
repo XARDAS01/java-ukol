@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  java_postgres_db:
+    image: postgres:alpine3.18
+    container_name: java_postgres_db
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=java_postgres_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+
+  app:
+    build: ./
+    container_name: java-app
+    ports:
+      - '8080:8080'
