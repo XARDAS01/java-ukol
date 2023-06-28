@@ -1,12 +1,13 @@
 spring:
   main:
-    allow-circular-references: true
+    allow-bean-definition-overriding: true
   liquibase:
     change-log: classpath:/schema.xml
+    enabled: true
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
       database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://java_postgres_db:5432/java_postgres_db
