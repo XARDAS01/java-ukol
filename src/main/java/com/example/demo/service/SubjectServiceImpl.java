@@ -23,7 +23,7 @@ public class SubjectServiceImpl implements SubjectService {
   private final SubjectRepository subjectRepository;
   private final BankAccountRepository bankAccountRepository;
   private final PrefixClient prefixClient;
-  private BankAccountService bankAccountService;
+//  private BankAccountService bankAccountService;
 
   @Override
   @Transactional

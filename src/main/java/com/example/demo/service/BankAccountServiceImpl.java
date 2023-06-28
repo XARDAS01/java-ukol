@@ -19,7 +19,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
   private final BankAccountRepository bankAccountRepository;
   private final BankAccountMapper bankAccountMapper;
-  private final SubjectService subjectService;
+//  private final SubjectService subjectService;
 
   @Override
   @Transactional(readOnly = true)
