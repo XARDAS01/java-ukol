@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -15,6 +16,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Subject {
 
   @Id

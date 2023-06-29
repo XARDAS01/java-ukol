@@ -14,4 +14,6 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long>,
 
   //@Query("SELECT ba FROM BankAccount ba WHERE ba.subject.id = :subjectId")
   Optional<BankAccount> findBySubject_Id(Long subjectId);
+
+  BankAccount findById (long id);
 }

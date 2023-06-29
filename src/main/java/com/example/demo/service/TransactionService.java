@@ -12,5 +12,5 @@ public interface TransactionService {
    * @param request holding transaction amount
    * @param account id of account where transaction will be added
    */
-  void createTransaction(Long account, PostTransactionRequest request);
+  void createTransaction(long account, PostTransactionRequest request);
 }

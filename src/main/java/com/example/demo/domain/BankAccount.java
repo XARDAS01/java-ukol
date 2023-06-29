@@ -7,15 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "bank_accounts")
+@EqualsAndHashCode(of = "id")
+@Getter
+@Setter
+@NoArgsConstructor
 public class BankAccount {
 
   @Id
