@@ -7,8 +7,9 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
       database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
   datasource:
     url: jdbc:postgresql://java_postgres_db:5432/java_postgres_db
 #    url: jdbc:postgresql://localhost:5432/java_postgres_db
