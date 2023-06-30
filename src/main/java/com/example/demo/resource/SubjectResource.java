@@ -28,7 +28,7 @@ public class SubjectResource {
     final var result = subjectService.findById(id);
 
     if (result.isEmpty()) {
-      return ResponseEntity.badRequest().build();
+      return ResponseEntity.notFound().build();
     } else {
       return ResponseEntity.ok(result.get());
     }
