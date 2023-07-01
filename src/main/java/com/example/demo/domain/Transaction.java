@@ -10,6 +10,7 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Transaction {
 
   @Id
@@ -22,7 +23,7 @@ public class Transaction {
   @JoinColumn(name = "account")
   private BankAccount bankAccount;
 
-  public Transaction (BigDecimal amount, BankAccount bankAccount) {
+  public Transaction(BigDecimal amount, BankAccount bankAccount) {
     this.amount = amount;
     this.bankAccount = bankAccount;
   }

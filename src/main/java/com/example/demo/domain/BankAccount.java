@@ -1,16 +1,14 @@
 package com.example.demo.domain;
 
 import java.math.BigDecimal;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "bank_accounts")
@@ -34,4 +32,8 @@ public class BankAccount {
   @ManyToOne
   @JoinColumn(name = "subject")
   private Subject subject;
+
+  @OneToMany
+  @JoinColumn(name = "transactions")
+  private List<Transaction> transactions;
 }

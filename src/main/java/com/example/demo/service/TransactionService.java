@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.api.PostTransactionRequest;
+import org.springframework.http.ResponseEntity;
 
 public interface TransactionService {
 
@@ -11,6 +12,7 @@ public interface TransactionService {
    *
    * @param request holding transaction amount
    * @param account id of account where transaction will be added
+   * @return
    */
-  void createTransaction(long account, PostTransactionRequest request);
+  ResponseEntity<Void> createTransaction(Long account, PostTransactionRequest request);
 }

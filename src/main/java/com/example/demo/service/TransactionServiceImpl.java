@@ -7,6 +7,7 @@ import com.example.demo.repository.BankAccountRepository;
 import com.example.demo.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -22,10 +23,11 @@ public class TransactionServiceImpl implements TransactionService{
     private BankAccountRepository bankAccountRepository;
 
     @Override
-    public void createTransaction(long account, PostTransactionRequest request) {
-        if (request.getAmount().compareTo(BigDecimal.TEN) <= 0) throw new IllegalStateException("Your request will be probably rejected due to low balance");
-        Transaction transaction = new Transaction(request.getAmount(), bankAccountRepository.findById(account));
+    public ResponseEntity<Void> createTransaction(Long account, PostTransactionRequest request) {
+        if (request.getAmount().compareTo(BigDecimal.ZERO) <= 0) throw new IllegalStateException("Your request will be probably rejected due to low balance");
 
-        transactionRepository.save(transaction);
+        Optional<BankAccount> bankAccount = bankAccountRepository.findById(account);
+        transactionRepository.save(new Transaction(request.getAmount(), bankAccount.get()));
+        return ResponseEntity.accepted().build();
     }
 }
