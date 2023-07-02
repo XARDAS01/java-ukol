@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SequenceProviderImpl implements SequenceProvider {
 
-  public final static String QUERY = "select nextval('account_sequence')";
+    private final static String QUERY = "select nextval('account_sequence')";
 
-  private final JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
-  @Override
-  @Transactional(readOnly = true)
-  public String next() {
-    return String.valueOf(jdbcTemplate.queryForObject(QUERY, Long.class));
-  }
+    @Override
+    @Transactional(readOnly = true)
+    public String next() {
+        return (jdbcTemplate.queryForObject(QUERY, String.class));
+    }
 }

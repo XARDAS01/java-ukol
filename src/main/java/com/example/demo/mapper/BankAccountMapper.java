@@ -5,7 +5,7 @@ import com.example.demo.domain.BankAccount;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface BankAccountMapper {
 
   @Mapping(target = "subject", source = "subject.id")

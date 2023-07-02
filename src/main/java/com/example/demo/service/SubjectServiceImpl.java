@@ -2,16 +2,17 @@ package com.example.demo.service;
 
 import com.example.demo.api.CreateSubjectRequest;
 import com.example.demo.api.SubjectResponse;
-import com.example.demo.client.PrefixClient;
+import com.example.demo.domain.BankAccount;
+import com.example.demo.domain.Subject;
 import com.example.demo.mapper.SubjectMapper;
 import com.example.demo.repository.BankAccountRepository;
+import com.example.demo.repository.SequenceProvider;
 import com.example.demo.repository.SubjectRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,13 +23,21 @@ public class SubjectServiceImpl implements SubjectService {
   private final SubjectMapper subjectMapper;
   private final SubjectRepository subjectRepository;
   private final BankAccountRepository bankAccountRepository;
-  private final PrefixClient prefixClient;
-//  private BankAccountService bankAccountService;
+  private final SequenceProvider sequenceProvider;
 
   @Override
   @Transactional
   public Long save(CreateSubjectRequest request) {
-    return subjectRepository.saveAndFlush(subjectMapper.map(request)).getId();
+    BankAccount bankAccount = new BankAccount();
+    bankAccount.setSuffix(sequenceProvider.next());
+//    The microservice for this action should work on http://localhost:8082,
+//    but it does not exist, it gives an error creating bank_account
+//    bankAccount.setPrefix(prefixClient.getPrefix().getBody().getPrefix());
+
+    Subject subject = subjectMapper.map(request);
+    subject.setAccounts(List.of(bankAccount));
+
+    return subjectRepository.saveAndFlush(subject).getId();
   }
 
   @Override
