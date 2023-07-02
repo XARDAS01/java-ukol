@@ -16,7 +16,6 @@ create table bank_accounts
     subject bigint,
     primary key (id),
     foreign key (subject) references subjects (id)
-    foreign key (transaction) references transactions (id)
 );
 
 
