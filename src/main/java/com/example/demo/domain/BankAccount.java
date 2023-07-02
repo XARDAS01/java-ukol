@@ -1,14 +1,13 @@
 package com.example.demo.domain;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import lombok.Getter;
-import lombok.Setter;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "bank_accounts")
@@ -33,7 +32,7 @@ public class BankAccount {
   @JoinColumn(name = "subject")
   private Subject subject;
 
-  @OneToMany
-  @JoinColumn(name = "transactions")
-  private List<Transaction> transactions;
+  public BankAccount(Long id) {
+    this.id = id;
+  }
 }
