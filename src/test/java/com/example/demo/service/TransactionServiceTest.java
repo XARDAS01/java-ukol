@@ -18,11 +18,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @RequiredArgsConstructor
-class TransactionServiceImplTest {
+class TransactionServiceTest {
 
     private final TransactionRepository transactionRepository;
     private final SubjectRepository subjectRepository;
@@ -31,10 +29,10 @@ class TransactionServiceImplTest {
 
     @Test
     void createTransaction() {
-        PostTransactionRequest request = new PostTransactionRequest();
-        request.setAmount(new BigDecimal(1000));
+        PostTransactionRequest req = new PostTransactionRequest();
+        req.setAmount(new BigDecimal(1000));
 
-        Assertions.assertDoesNotThrow(() -> transactionService.createTransaction(600L, request));
+        Assertions.assertDoesNotThrow(() -> transactionService.createTransaction(600L, req));
 
         Transaction transaction = transactionRepository.findById(600L)
                 .orElseThrow(() -> new NoSuchElementException("Transaction not found"));
@@ -43,30 +41,28 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void createTransactionCheckAmount () {
-        PostTransactionRequest request = new PostTransactionRequest();
-        request.setAmount(new BigDecimal(0));
+    void createTransactionCheckAmount() {
+        PostTransactionRequest req = new PostTransactionRequest();
+        req.setAmount(new BigDecimal(0));
 
-        Assertions.assertThrows(IllegalStateException.class,
-                () -> transactionService.createTransaction(600L, request));
+        Assertions.assertThrows(IllegalStateException.class, () -> transactionService.createTransaction(600L, req));
     }
 
     @BeforeEach
-    void testBefore () {
-        BankAccount bankAccount = new BankAccount();
-        bankAccount.setId(600L);
-
+    void testBefore() {
+        BankAccount bankAccount = new BankAccount(600L);
         Subject subject = new Subject();
         subject.setId(600L);
         subject.setAccounts(List.of(bankAccount));
 
         subjectRepository.save(subject);
         bankAccountRepository.save(bankAccount);
+
     }
 
     @AfterEach
-    void testAfter () {
-        subjectRepository.deleteById(600L);
+    void testAfter() {
         bankAccountRepository.deleteById(600L);
+        subjectRepository.deleteById(600L);
     }
 }
